@@ -9,4 +9,4 @@ select
     current_timestamp() as timest,
     '!1st source' as source
 from
-    raw_parquet_data
+    eu_sustainability.SMART_FACTORY_TEST_VB.raw_parquet_data
