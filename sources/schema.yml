@@ -1,0 +1,7 @@
+version: 2
+
+sources:
+  - name: smart_factory_test_vb
+    tables:
+      - name: raw_parquet_data_source
+      - name: employee

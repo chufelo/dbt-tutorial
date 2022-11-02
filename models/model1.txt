@@ -1,0 +1,25 @@
+{{ config( 
+        schema = 'SMART_FACTORY_TEST_VB',
+        materialization = 'table'
+)}}
+
+{%- set yaml_metadata -%}
+source_model: "raw_parquet_data"
+src_pk: "CUSTOMERID"
+src_nk: "LATITUDE"
+src_ldts: "DATE"
+src_source: "COUNTRY"
+{%- endset-%}
+
+{% set metadata_dict = fromyaml(yaml_metadata) %}
+
+
+{{
+    hub(
+        hashkey = metadata_dict["src_pk"],
+        business_keys = metadata_dict["src_nk"],
+        src_ldts = metadata_dict["src_ldts"],
+        src_rsrc = metadata_dict["src_source"],
+        source_models = metadata_dict["source_model"]
+    )
+}}

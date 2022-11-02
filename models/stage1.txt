@@ -1,0 +1,21 @@
+{{ config(
+        materialized = 'table') 
+}}
+
+
+{%- set yaml_metadata -%}
+
+source_model: 'model2'
+ldts: 'current_timestamp()'
+rsrc: 'source'
+{%- endset -%}
+
+{%- set metadata_dict = fromyaml(yaml_metadata) -%}
+
+{%- set source_model = metadata_dict['source_model'] -%}
+{%- set ldts = metadata_dict['ldts'] -%}
+{%- set rsrc = metadata_dict['rsrc'] -%}
+
+{{ datavault4dbt.stage(source_model='model2',
+                        ldts=ldts,
+                        rsrc=rsrc) }}
